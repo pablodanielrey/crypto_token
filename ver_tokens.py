@@ -1,6 +1,7 @@
 import os
 import sys
 import pkcs11
+from pkcs11 import KeyType, ObjectClass, Mechanism
 
 
 user_pin = os.environ.get('pkcs11_pin')
@@ -14,4 +15,8 @@ for slot in cry.get_slots(token_present=True):
     token = slot.get_token()
     print(f'usando : {token}')
     with token.open(user_pin=user_pin) as session:
-        print(session)
+        print('Se obtuvo una sesión correctamente')
+        texto = 'algo a firmar'
+        priv = session.get_key(key_type=KeyType.RSA, object_class=ObjectClass.PRIVATE_KEY)
+        signature = priv.sign(texto)
+        print(f'La firma para : {texto} es : {signature}')
