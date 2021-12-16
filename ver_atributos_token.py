@@ -10,7 +10,10 @@ if not user_pin:
 
 p = "/opt/CryptoIDEUser/x64/lib/linux/x64/libcryptoide_pkcs11.so"
 cry = pkcs11.lib(p)
+print('libreria inicializada')
 for slot in cry.get_slots(token_present=True):
     print(f'slot encontrado : {slot}')
     token = slot.get_token()
-    print(f'usando : {token}')
+    print(token)
+    print(token.label)
+    print(token.flags)
