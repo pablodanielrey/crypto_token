@@ -17,3 +17,6 @@ for slot in cry.get_slots(token_present=True):
     print(token)
     print(token.label)
     print(token.flags)
+    with token.open(user_pin=user_pin) as session:
+        print('Se obtuvo una sesión correctamente')
+        
